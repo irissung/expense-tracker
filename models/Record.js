@@ -1,19 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const recordSchema = new Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  category: {
-    type: String,
-    required: true
-  },
+  name: String,
+  category: String,
   date: String,
-  amount: {
-    type: Number,
-    required: true
-  },
-  totalAmount: Number
+  amount: Number,
+  totalAmount: Number,
+  icon: String,
+  remark: String
 })
 module.exports = mongoose.model('Record', recordSchema)
