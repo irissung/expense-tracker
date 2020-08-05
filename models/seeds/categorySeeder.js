@@ -1,26 +1,26 @@
-const Record = require('../Record')
+const Category = require('../Category')
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
-  Record.create(
+  Category.create(
     {
-      category: '餐飲食品',
+      name: '餐飲食品',
       icon: '<i class="fas fa-utensils"></i>'
     },
     {
-      category: '家居物業',
+      name: '家居物業',
       icon: '<i class="fas fa-home"></i>'
     },
     {
-      category: '休閒娛樂',
+      name: '休閒娛樂',
       icon: '<i class="fas fa-grin-beam"></i>'
     },
     {
-      category: '交通出行',
+      name: '交通出行',
       icon: '<i class="fas fa-shuttle-van"></i>'
     },
     {
-      category: '其他',
+      name: '其他',
       icon: '<i class="fas fa-hand-holding-usd"></i>'
     },
   )

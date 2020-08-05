@@ -1,0 +1,48 @@
+<div class="total-amount">
+  <p>100000</p>
+</div>
+<div class="filter-group" style="display: flex;">
+  <div class="month-filter">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      月份
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">2020/08</a>
+    </div>
+  </div>
+  <div class="category-filter">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      支出類別
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="#">全部類別</a>
+      {{#each categories}}
+      <a class="dropdown-item" href="#">{{this.name}}</a>
+      {{/each}}
+    </div>
+  </div>
+  <button class="btn btn-secondary" type="button" id="create">
+    <a href="/record/create"><i class="fas fa-plus"></i></a>
+  </button>
+</div>
+<table class="table table-striped">
+  <tbody>
+    {{#each records}}
+    <tr>
+      <td>{{{this.icon}}}</td>
+      <td>
+        <p>{{this.name}}</p>
+        <p>{{this.date}}</p>
+      </td>
+      <td>{{this.remark}}</td>
+      <td>{{this.amount}}</td>
+      <td>
+        <button><i class="fas fa-pen"></i></button>
+        <button><i class="far fa-trash-alt"></i></button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
