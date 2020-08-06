@@ -23,8 +23,8 @@
       {{/each}}
     </div>
   </div>
-  <button class="btn btn-secondary" type="button" id="create">
-    <a href="/record/create"><i class="fas fa-plus"></i></a>
+  <button class="btn btn-secondary" type="button" id="create" onclick="self.location.href='/record/create'">
+    <i class="fas fa-plus"></i>
   </button>
 </div>
 <table class="table table-striped">
@@ -39,8 +39,10 @@
       <td>{{this.remark}}</td>
       <td>{{this.amount}}</td>
       <td>
-        <button><i class="fas fa-pen"></i></button>
-        <button><i class="far fa-trash-alt"></i></button>
+        <button class="edit" id="edit" onclick="self.location.href='/record/{{this._id}}/edit'"><i
+            class="fas fa-pen"></i></button>
+        <button class="delete" id="delete" onclick="self.location.href='/record/{{this._id}}/delete'"><i
+            class="far fa-trash-alt"></i></button>
       </td>
     </tr>
     {{/each}}

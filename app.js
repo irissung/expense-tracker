@@ -31,12 +31,13 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+//to create page
 app.get('/record/create', (req, res) => {
   res.render('new')
 })
 
+//create new record
 app.post('/new', (req, res) => {
-  console.log(req.body)
   const body = req.body
   Category.find({ "name": `${body.category}` })
     .lean()
@@ -47,7 +48,32 @@ app.post('/new', (req, res) => {
     )
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
+})
 
+//to edit page
+app.get('/record/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .lean()
+    .then((record) => res.render('edit', { record }))
+    .catch(error => console.log(error))
+})
+
+//edit record detail
+app.post('/:id/edit', (req, res) => {
+  const body = req.body
+  const id = req.params.id
+  body.amount = Number(body.amount)
+  Category.find({ "name": `${body.category}` })
+    .lean()
+    .then(item => { body.icon = item[0].icon })
+  return Record.findById(id)
+    .then(record => {
+      record = Object.assign(record, body)
+      return record.save()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.listen(3000, () => {
