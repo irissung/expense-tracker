@@ -1,0 +1,33 @@
+<form class="new-record" action="/new" method="POST">
+  <div>新增支出</div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="name" name="name" placeholder="項目名稱" required>
+  </div>
+  <div class="form-group">
+    <select class="form-control" id="category" name="category" placeholder="支出類別" required>
+      <option>餐飲食品</option>
+      <option>家居物業</option>
+      <option>休閒娛樂</option>
+      <option>交通出行</option>
+      <option>其他</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="date" class="form-control record-date" id="date" name="date" placeholder="日期" value="" required>
+  </div>
+  <div class="form-group">
+    <input type="number" class="form-control" id="amount" name="amount" placeholder="金額" required>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="remark" name="remark" placeholder="備註">
+  </div>
+  <div class="form-group row justify-content-center">
+    <button type="submit" class="btn mt-3">儲存</button>
+  </div>
+</form>
+
+<script>
+  const date = document.querySelector('.record-date')
+  const now = new Date()
+  date.value = now.toISOString().slice(0, 10)
+</script>

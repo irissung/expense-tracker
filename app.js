@@ -11,6 +11,7 @@ require('./config/mongoose')
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   const categories = []
@@ -27,6 +28,24 @@ app.get('/', (req, res) => {
   Record.find()
     .lean()
     .then(records => res.render('index', { records, categories }))
+    .catch(error => console.log(error))
+})
+
+app.get('/record/create', (req, res) => {
+  res.render('new')
+})
+
+app.post('/new', (req, res) => {
+  console.log(req.body)
+  const body = req.body
+  Category.find({ "name": `${body.category}` })
+    .lean()
+    .then(item => {
+      body.icon = item[0].icon
+      return Record.create(body)
+    }
+    )
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 
 })
