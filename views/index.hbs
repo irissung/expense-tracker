@@ -1,25 +1,16 @@
 <div class="total-amount">
-  <p>100000</p>
+  <p>{{totalAmount}}</p>
 </div>
 <div class="filter-group" style="display: flex;">
-  <div class="month-filter">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false">
-      月份
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">2020/08</a>
-    </div>
-  </div>
   <div class="category-filter">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       支出類別
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">全部類別</a>
+      <a class="dropdown-item" href="/">全部類別</a>
       {{#each categories}}
-      <a class="dropdown-item" href="#">{{this.name}}</a>
+      <a class="dropdown-item" href="/filter/{{this.name}}">{{this.name}}</a>
       {{/each}}
     </div>
   </div>
@@ -41,8 +32,10 @@
       <td>
         <button class="edit" id="edit" onclick="self.location.href='/record/{{this._id}}/edit'"><i
             class="fas fa-pen"></i></button>
-        <button class="delete" id="delete" onclick="self.location.href='/record/{{this._id}}/delete'"><i
-            class="far fa-trash-alt"></i></button>
+        <form action="/record/{{this._id}}/delete" method="POST" style="display: inline;"
+          onsubmit="return confirm('確定要刪除嗎？')">
+          <button class="delete" type="submit"><i class="far fa-trash-alt"></i></button>
+        </form>
       </td>
     </tr>
     {{/each}}

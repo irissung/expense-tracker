@@ -15,19 +15,21 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
   const categories = []
+  let totalAmount = 0
   Category.find()
     .lean()
-    .sort({ name: -1 })
     .then(items => {
-      items.forEach(item => {
-        categories.push(item)
-      })
+      items.forEach(item => categories.push(item))
     })
     .catch(error => console.log(error))
 
   Record.find()
     .lean()
-    .then(records => res.render('index', { records, categories }))
+    .sort({ 'date': 1 })
+    .then(records => {
+      records.forEach(item => totalAmount += item.amount)
+      res.render('index', { records, categories, totalAmount })
+    })
     .catch(error => console.log(error))
 })
 
@@ -44,8 +46,7 @@ app.post('/new', (req, res) => {
     .then(item => {
       body.icon = item[0].icon
       return Record.create(body)
-    }
-    )
+    })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -73,6 +74,34 @@ app.post('/:id/edit', (req, res) => {
       return record.save()
     })
     .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+//delete record detail
+app.post('/record/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .then(record => record.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+//filter record category
+app.get('/filter/:name', (req, res) => {
+  const name = req.params.name
+  const categories = []
+  let totalAmount = 0
+  Category.find()
+    .lean()
+    .then(items => {
+      items.forEach(item => categories.push(item))
+    })
+  return Record.find({ 'category': `${name}` })
+    .lean()
+    .then(records => {
+      records.forEach(item => totalAmount += item.amount)
+      res.render('index', { totalAmount, records, categories })
+    })
     .catch(error => console.log(error))
 })
 
