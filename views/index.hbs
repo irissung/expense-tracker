@@ -32,7 +32,7 @@
       <td>
         <button class="edit" id="edit" onclick="self.location.href='/record/{{this._id}}/edit'"><i
             class="fas fa-pen"></i></button>
-        <form action="/record/{{this._id}}/delete" method="POST" style="display: inline;"
+        <form action="/record/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
           onsubmit="return confirm('確定要刪除嗎？')">
           <button class="delete" type="submit"><i class="far fa-trash-alt"></i></button>
         </form>
