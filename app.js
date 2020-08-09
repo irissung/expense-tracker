@@ -5,6 +5,7 @@ const methodOverride = require('method-override')
 const app = express()
 const Record = require('./models/Record')
 const Category = require('./models/Category')
+const PORT = process.env.PORT || 3000
 
 //載入&連線mongoose
 require('./config/mongoose')
@@ -38,6 +39,6 @@ app.get('/filter/:name', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log('App is running on http://localhost:3000')
 })
