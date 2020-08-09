@@ -45,6 +45,7 @@
 - Node.js: v10.15.0
 - Express: v4.17.1
 - Express-Handlebars: v4.0.4
+- Robo 3T: v3.1
 
 ### 開發人員
 Iris Sung
