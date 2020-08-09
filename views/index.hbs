@@ -1,5 +1,5 @@
 <div class="total-amount">
-  <p>{{totalAmount}}</p>
+  <p>總支出：{{totalAmount}} 元</p>
 </div>
 <div class="filter-group" style="display: flex;">
   <div class="category-filter">
@@ -14,30 +14,34 @@
       {{/each}}
     </div>
   </div>
-  <button class="btn btn-secondary" type="button" id="create" onclick="self.location.href='/record/create'">
-    <i class="fas fa-plus"></i>
-  </button>
+  <div class="create">
+    <button class="btn btn-secondary" type="button" id="create" onclick="self.location.href='/record/create'">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
 </div>
-<table class="table table-striped">
-  <tbody>
-    {{#each records}}
-    <tr>
-      <td>{{{this.icon}}}</td>
-      <td>
-        <p>{{this.name}}</p>
-        <p>{{this.date}}</p>
-      </td>
-      <td>{{this.remark}}</td>
-      <td>{{this.amount}}</td>
-      <td>
-        <button class="edit" id="edit" onclick="self.location.href='/record/{{this._id}}/edit'"><i
-            class="fas fa-pen"></i></button>
-        <form action="/record/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
-          onsubmit="return confirm('確定要刪除嗎？')">
-          <button class="delete" type="submit"><i class="far fa-trash-alt"></i></button>
-        </form>
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="list-group">
+  <table class="table table-striped">
+    <tbody>
+      {{#each records}}
+      <tr class="row">
+        <td class="icon col-1">{{{this.icon}}}</td>
+        <td class="col-3">
+          <p>{{this.name}}</p>
+          <p class="date">{{this.date}}</p>
+        </td>
+        <td class="col-4">{{this.remark}}</td>
+        <td class="amount col-2">{{this.amount}}</td>
+        <td class="col-2">
+          <button class="edit" id="edit" onclick="self.location.href='/record/{{this._id}}/edit'"><i
+              class="fas fa-pen"></i></button>
+          <form action="/record/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
+            onsubmit="return confirm('確定要刪除嗎？')">
+            <button class="delete" type="submit"><i class="far fa-trash-alt"></i></button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
